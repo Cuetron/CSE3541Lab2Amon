@@ -39,3 +39,21 @@ namespace ShareefSoftware
         }
     }
 }
+
+/*
+ * 
+ * 1: Make an empyty set to add MST into
+ * 
+ * 2: For every node, create a new set with just that element in it
+ * 
+ * 3: sort the edges on the graph in adcending order (smallest to largest)
+ * 
+ * 4: for every edge in the list of edges sorted, check if they are in the same set
+ * 
+ * 5: If they are in the same set, they are already connected so dont add them, move on
+ * 
+ * 6: If they are not in the same set already, add the edge to the empty MST we made at the start and then add node B ot node A's set.
+ * 
+ * 7: When initial MST reaches |e| we are done
+ * 
+ */
