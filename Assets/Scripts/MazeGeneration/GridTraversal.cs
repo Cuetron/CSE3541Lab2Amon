@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using amonq20;
+using System.Collections.Generic;
 
 namespace ShareefSoftware
 {
@@ -17,7 +18,7 @@ namespace ShareefSoftware
         public IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> GenerateMaze(int startRow, int startColumn)
         {
             haveVisited = new bool[grid.NumberOfRows, grid.NumberOfColumns];
-            return KruskalsAlg((startRow, startColumn));
+            return KruskalsAlg();
         }
 
         // Goes through every node in the duel graph and assigns and edge weight to it (need to randomize later)
@@ -41,21 +42,22 @@ namespace ShareefSoftware
             return edges;
         }
 
-        private IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> KruskalsAlg((int Row, int Column) cell)
+        private IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> KruskalsAlg()
         {
-            if (!haveVisited[cell.Row, cell.Column])
+            var edges = BuildWeightedEdgeList();
+
+            // Sort by Weight, ascending (in place)
+            edges.Sort((a, b) => a.Weight.CompareTo(b.Weight));
+
+            var unionFind = new UnionFind(grid.NumberOfRows, grid.NumberOfColumns);
+
+            foreach (var edge in edges)
             {
-                haveVisited[cell.Row, cell.Column] = true;
-                foreach (var neighbor in grid.Neighbors(cell.Row, cell.Column))
-                {
-                    if (!haveVisited[neighbor.Row, neighbor.Column])
-                    if (!haveVisited[neighbor.Row, neighbor.Column])
-                    {
-                        foreach (var edge in KruskalsAlg(neighbor))
-                            yield return edge;
-                        yield return ((cell.Row, cell.Column), neighbor);
-                    }
-                }
+                if (unionFind.Find(edge.From.Row, edge.From.Column) == unionFind.Find(edge.To.Row, edge.To.Column))
+                    continue;
+
+                unionFind.Union(edge.From.Row, edge.From.Column, edge.To.Row, edge.To.Column);
+                yield return (edge.From, edge.To);
             }
         }
     }
