@@ -397,12 +397,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileStyle: 0
-  numberOfRows: 10
-  numberOfColumns: 10
+  numberOfRows: 500
+  numberOfColumns: 20
   barrierPrefabs:
-  - {fileID: 3093966231757914467, guid: 243755bc501f4324b9be4238e15a9686, type: 3}
+  - {fileID: 1940013879285844, guid: 9495754c709bff341a2836b50fd2469e, type: 3}
   pathPrefabs:
-  - {fileID: 6869099080896954662, guid: 3a69e0e92dc07c0499883ea2e2a04ddd, type: 3}
+  - {fileID: 100000, guid: 9785164cfb353eb4d9ae55cc30780781, type: 3}
   cellWidth: 4
   cellHeight: 4
   parentForNewObjects: {fileID: 882375733}
