@@ -14,10 +14,31 @@ namespace ShareefSoftware
             this.grid = grid;
         }
         /// Kruskals enumeration
-        public IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> DepthFirst(int startRow, int startColumn)
+        public IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> GenerateMaze(int startRow, int startColumn)
         {
             haveVisited = new bool[grid.NumberOfRows, grid.NumberOfColumns];
             return KruskalsAlg((startRow, startColumn));
+        }
+
+        // Goes through every node in the duel graph and assigns and edge weight to it (need to randomize later)
+        private List<((int Row, int Column) From, (int Row, int Column) To, int Weight)> BuildWeightedEdgeList()
+        {
+            var edges = new List<((int Row, int Column) From, (int Row, int Column) To, int Weight)>();
+            int weightCounter = 0;
+
+            for (int row = 0; row < grid.NumberOfRows; row++)
+            {
+                for (int column = 0; column < grid.NumberOfColumns; column++)
+                {
+                    foreach (var neighbor in grid.ForwardNeighbors(row, column))
+                    {
+                        edges.Add(((row, column), neighbor, weightCounter));
+                        weightCounter++;
+                    }
+                }
+            }
+
+            return edges;
         }
 
         private IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> KruskalsAlg((int Row, int Column) cell)

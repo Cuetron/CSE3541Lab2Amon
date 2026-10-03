@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 namespace ShareefSoftware
 {
@@ -33,6 +34,16 @@ namespace ShareefSoftware
          * to determine neighbors (instead of using method 'Neighbors'), 
          * then define it here. Use the same method name as you defined in IGridGraph.
          */
+
+        // Goes through all the neighbors of the nodes.
+        public IEnumerable<(int Row, int Column)> ForwardNeighbors(int row, int column)
+        {
+            if (row + 1 < NumberOfRows)
+                yield return (row + 1, column);
+
+            if (column + 1 < NumberOfColumns)
+                yield return (row, column + 1);
+        }
 
         public void SetCellValue(int row, int column, T cellValue)
         {
