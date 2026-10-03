@@ -49,12 +49,6 @@ namespace ShareefSoftware
         {
             var edges = BuildWeightedEdgeList();
 
-            // TEMP DEBUG
-            Debug.Log($"Edge count: {edges.Count}, Expected max possible: {2 * grid.NumberOfRows * grid.NumberOfColumns}");
-            Debug.Log($"Min weight: {edges.Min(e => e.Weight)}, Max weight: {edges.Max(e => e.Weight)}");
-            int uniqueWeights = edges.Select(e => e.Weight).Distinct().Count();
-            Debug.Log($"Unique weights: {uniqueWeights} out of {edges.Count} edges");
-
             // Sort by Weight, ascending (in place)
             edges.Sort((a, b) => a.Weight.CompareTo(b.Weight));
 
