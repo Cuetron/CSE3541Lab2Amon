@@ -29,6 +29,11 @@ namespace ShareefSoftware
                 neighbors.Add(neighbor);
             return EnumerableHelpers.Shuffle(neighbors, random);
         }
+        // Need to add for my implementation of the Neighbors function
+        public IEnumerable<(int Row, int Column)> ForwardNeighbors(int row, int column)
+        {
+            return realInstance.ForwardNeighbors(row, column);
+        }
 
         public IEnumerator<(int Row, int Column, T NodeValue)> GetEnumerator()
         {

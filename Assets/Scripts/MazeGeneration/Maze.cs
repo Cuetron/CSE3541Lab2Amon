@@ -97,6 +97,11 @@ namespace ShareefSoftware
             }
         }
 
+        public IEnumerable<(int Row, int Column)> ForwardNeighbors(int row, int column)
+        {
+            return ((IGridGraph<Direction>)mazeGrid).ForwardNeighbors(row, column);
+        }
+
         public IEnumerator<(int Row, int Column, Direction NodeValue)> GetEnumerator()
         {
             return ((IEnumerable<(int Row, int Column, Direction NodeValue)>)mazeGrid).GetEnumerator();
