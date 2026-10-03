@@ -54,7 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MazeGeneration\Maze.cs" />
+    <Compile Include="Assets\Scripts\MazeGeneration\MazeRotationController.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\Direction.cs" />
+    <Compile Include="Assets\Scripts\MazeGeneration\RotationHandler.cs" />
+    <Compile Include="Assets\InputSystem_Actions.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\GridTraversal.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\EnumerableHelpers.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\MazeUtility.cs" />
@@ -66,6 +69,7 @@
     <Compile Include="Assets\Scripts\LevelGeneration.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\GridGraphRandomizedNeighborsDecorator.cs" />
     <Compile Include="Assets\Scripts\GameObjectFactoryPrefab.cs" />
+    <Compile Include="Assets\Scripts\MazeGeneration\InputManager.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\MazeQuery.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\GridUtility.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\GridGraph.cs" />

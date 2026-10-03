@@ -225,6 +225,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 882375733}
+  - component: {fileID: 882375735}
+  - component: {fileID: 882375734}
   m_Layer: 0
   m_Name: CreatedMaze
   m_TagString: Untagged
@@ -247,6 +249,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &882375734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882375732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b6483306a0f843b8e3ee0f3c1c06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::amonq20.InputManager
+  mazeRotationController: {fileID: 882375735}
+--- !u!114 &882375735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882375732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6981d7f92a2113e45bd6e2da80cee09b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::amonq20.MazeRotationController
+  rotationSpeed: 20
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileStyle: 0
   numberOfRows: 10
-  numberOfColumns: 20
+  numberOfColumns: 10
   barrierPrefabs:
   - {fileID: 3093966231757914467, guid: 243755bc501f4324b9be4238e15a9686, type: 3}
   pathPrefabs:
@@ -379,6 +407,8 @@ MonoBehaviour:
   cellHeight: 4
   parentForNewObjects: {fileID: 882375733}
   randomSeed: 0
+  mazeCenter: {x: 0, y: 0, z: 0}
+  mazeRotationController: {fileID: 882375735}
 --- !u!4 &1934672967
 Transform:
   m_ObjectHideFlags: 0

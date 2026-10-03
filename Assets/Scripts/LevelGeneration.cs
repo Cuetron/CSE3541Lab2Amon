@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using amonq20;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShareefSoftware
@@ -14,13 +15,16 @@ namespace ShareefSoftware
         [SerializeField] private float cellHeight;
         [SerializeField] private Transform parentForNewObjects;
         [SerializeField] int randomSeed = 0;
-
+        [SerializeField] Vector3 mazeCenter;
+        [SerializeField] private MazeRotationController mazeRotationController;
         private void Awake()
         {
             System.Random random = CreateRandom();
             var maze = new Maze(numberOfRows, numberOfColumns, random);
             IGridGraph<bool> occupancyGrid = ConvertMazeToOccupancyGraph(maze);
             CreatePrefabs(random, occupancyGrid);
+            mazeCenter = ComputeMazeCenter(occupancyGrid);
+            mazeRotationController.SetPivot(mazeCenter);
         }
 
         private void CreatePrefabs(System.Random random, IGridGraph<bool> occupancyGrid)
@@ -71,6 +75,12 @@ namespace ShareefSoftware
             }
             stringBuilder.AppendLine();
             Debug.Log(stringBuilder.ToString());
+        }
+        private Vector3 ComputeMazeCenter(IGridGraph<bool> occupancyGrid)
+        {
+            float centerX = cellWidth * (occupancyGrid.NumberOfColumns - 1) / 2f;
+            float centerZ = cellHeight * (occupancyGrid.NumberOfRows - 1) / 2f;
+            return new Vector3(centerX, 0, centerZ);
         }
     }
 }
