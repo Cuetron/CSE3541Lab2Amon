@@ -17,14 +17,17 @@ namespace ShareefSoftware
         [SerializeField] int randomSeed = 0;
         [SerializeField] Vector3 mazeCenter;
         [SerializeField] private MazeRotationController mazeRotationController;
+        [SerializeField] private Camera mainCamera;
         private void Awake()
         {
             System.Random random = CreateRandom();
             var maze = new Maze(numberOfRows, numberOfColumns, random);
             IGridGraph<bool> occupancyGrid = ConvertMazeToOccupancyGraph(maze);
             CreatePrefabs(random, occupancyGrid);
+
             mazeCenter = ComputeMazeCenter(occupancyGrid);
             mazeRotationController.SetPivot(mazeCenter);
+            PositionCameraAboveMaze(mazeCenter, occupancyGrid);
         }
 
         private void CreatePrefabs(System.Random random, IGridGraph<bool> occupancyGrid)
@@ -81,6 +84,21 @@ namespace ShareefSoftware
             float centerX = cellWidth * (occupancyGrid.NumberOfColumns - 1) / 2f;
             float centerZ = cellHeight * (occupancyGrid.NumberOfRows - 1) / 2f;
             return new Vector3(centerX, 0, centerZ);
+        }
+
+        // Sets the camera at an angle you can see the entire maze, it will move the camera further back based on how large the base of the maze is
+        private void PositionCameraAboveMaze(Vector3 mazeCenter, IGridGraph<bool> occupancyGrid)
+        {
+            float mazeWidth = cellWidth * (occupancyGrid.NumberOfColumns - 1);
+            float mazeDepth = cellHeight * (occupancyGrid.NumberOfRows - 1);
+            float largestDimension = Mathf.Max(mazeWidth, mazeDepth);
+
+            float fovRadians = mainCamera.fieldOfView * Mathf.Deg2Rad;
+            float margin = 2.5f;
+            float height = (largestDimension / 2f) / Mathf.Tan(fovRadians / 2f) * margin;
+
+            mainCamera.transform.position = new Vector3(mazeCenter.x, height, mazeCenter.z);
+            mainCamera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         }
     }
 }

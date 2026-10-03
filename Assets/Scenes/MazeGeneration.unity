@@ -409,6 +409,7 @@ MonoBehaviour:
   randomSeed: 0
   mazeCenter: {x: 0, y: 0, z: 0}
   mazeRotationController: {fileID: 882375735}
+  mainCamera: {fileID: 963194227}
 --- !u!4 &1934672967
 Transform:
   m_ObjectHideFlags: 0

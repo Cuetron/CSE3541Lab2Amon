@@ -10,13 +10,13 @@ namespace ShareefSoftware
         T GetCellValue(int row, int column);
         IEnumerable<(int Row, int Column)> Neighbors(int row, int column);
 
-        // Needed to define my own method to avoid double edge definitions
-        IEnumerable<(int Row, int Column)> ForwardNeighbors(int row, int column);
-
         /*
          * (Optional) Define the method signature for a method that will retrieve neighbors
          * of a cell if you will not use the 'Neighbors' method above.
          * Use a different method name than 'Neighbors'.
          */
+
+        // Needed to define my own method to avoid double edge definitions
+        IEnumerable<(int Row, int Column)> ForwardNeighbors(int row, int column);
     }
 }
