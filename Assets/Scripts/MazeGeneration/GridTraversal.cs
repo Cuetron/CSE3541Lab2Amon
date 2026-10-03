@@ -41,6 +41,7 @@ namespace ShareefSoftware
 }
 
 /*
+ * pre: Iterate over every cell and every grid neighbor, create the edges from that list of verticies.  Then assingn edge weights to those.
  * 
  * 1: Make an empyty set to add MST into
  * 

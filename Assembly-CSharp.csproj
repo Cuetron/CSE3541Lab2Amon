@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\GameObjectFactoryRandomFromList.cs" />
     <Compile Include="Assets\Scripts\MazeGeneration\GridNodeDataStore.cs" />
     <Compile Include="Assets\Scripts\GridGameObjectFactory.cs" />
+    <Compile Include="Assets\Scripts\MazeGeneration\UnionFind.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
