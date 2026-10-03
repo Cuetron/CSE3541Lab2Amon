@@ -1,5 +1,8 @@
 ﻿using amonq20;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using UnityEngine;
 
 namespace ShareefSoftware
 {
@@ -8,11 +11,13 @@ namespace ShareefSoftware
     {
         private bool[,] haveVisited;
         private readonly IGridGraph<T> grid;
+        private readonly System.Random random;
 
         /// Constructor
-        public GridTraversal(IGridGraph<T> grid)
+        public GridTraversal(IGridGraph<T> grid, System.Random random)
         {
             this.grid = grid;
+            this.random = random;
         }
         /// Kruskals enumeration
         public IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> GenerateMaze(int startRow, int startColumn)
@@ -25,7 +30,6 @@ namespace ShareefSoftware
         private List<((int Row, int Column) From, (int Row, int Column) To, int Weight)> BuildWeightedEdgeList()
         {
             var edges = new List<((int Row, int Column) From, (int Row, int Column) To, int Weight)>();
-            int weightCounter = 0;
 
             for (int row = 0; row < grid.NumberOfRows; row++)
             {
@@ -33,8 +37,7 @@ namespace ShareefSoftware
                 {
                     foreach (var neighbor in grid.ForwardNeighbors(row, column))
                     {
-                        edges.Add(((row, column), neighbor, weightCounter));
-                        weightCounter++;
+                        edges.Add(((row, column), neighbor, random.Next(0, 10 * grid.NumberOfRows * grid.NumberOfColumns)));
                     }
                 }
             }
@@ -45,6 +48,12 @@ namespace ShareefSoftware
         private IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> KruskalsAlg()
         {
             var edges = BuildWeightedEdgeList();
+
+            // TEMP DEBUG
+            Debug.Log($"Edge count: {edges.Count}, Expected max possible: {2 * grid.NumberOfRows * grid.NumberOfColumns}");
+            Debug.Log($"Min weight: {edges.Min(e => e.Weight)}, Max weight: {edges.Max(e => e.Weight)}");
+            int uniqueWeights = edges.Select(e => e.Weight).Distinct().Count();
+            Debug.Log($"Unique weights: {uniqueWeights} out of {edges.Count} edges");
 
             // Sort by Weight, ascending (in place)
             edges.Sort((a, b) => a.Weight.CompareTo(b.Weight));

@@ -28,7 +28,7 @@ namespace ShareefSoftware
         {
             var grid = new GridGraphRandomizedNeighborsDecorator<int>(new GridGraph<int>(numberOfRows, numberOfColumns, GraphValueAccessorConstant<int>.DefaultConstant), random);
 
-            var mazeGenerator = new GridTraversal<int>(grid);
+            var mazeGenerator = new GridTraversal<int>(grid, random);
 
             mazeGrid = new GridGraph<Direction>(numberOfRows, numberOfColumns, new GridNodeDataStore<Direction>(numberOfRows, numberOfColumns));
 
